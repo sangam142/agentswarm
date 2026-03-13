@@ -6,7 +6,7 @@ import (
 	"math"
 	"time"
 
-	"agentswarm/internal/models"
+	"github.com/shrish/agentswarm/internal/models"
 )
 
 // ════════════════════════════════════════════════════════════════════════
@@ -33,7 +33,7 @@ type EnsembleAgent struct {
 	decayHalfLife     time.Duration // older signals count less
 
 	// State
-	recentSignals []models.Signal    // sliding window of recent signals
+	recentSignals []models.Signal // sliding window of recent signals
 	agentWeights  map[string]float64 // agent_id -> weight based on performance
 }
 
@@ -68,11 +68,11 @@ func NewEnsembleAgent(deps *Deps, cfg EnsembleConfig) *EnsembleAgent {
 		maxOrderSize:      cfg.MaxOrderSize,
 		decayHalfLife:     cfg.DecayHalfLife,
 		recentSignals:     make([]models.Signal, 0),
-		agentWeights: map[string]float64{
-			"arb-alpha":     1.0,
-			"news-reactor":  1.2, // higher weight — LLM signals are more informative
-			"momentum-wave": 0.7, // lower weight — currently underperforming
-			"spread-maker":  0.5, // market maker signals are neutral
+		agentWeights:      map[string]float64{
+			"arb-alpha":      1.0,
+			"news-reactor":   1.2, // higher weight — LLM signals are more informative
+			"momentum-wave":  0.7, // lower weight — currently underperforming
+			"spread-maker":   0.5, // market maker signals are neutral
 		},
 	}
 }
@@ -126,8 +126,8 @@ func (e *EnsembleAgent) ingestSignal(ctx context.Context, sig models.Signal) {
 
 func (e *EnsembleAgent) checkConsensus(ctx context.Context, marketID string, signals []models.Signal) {
 	// Count unique agents agreeing on a direction
-	agentVotes := make(map[string]string) // agent_id -> direction
-	agentConf := make(map[string]float64) // agent_id -> confidence
+	agentVotes := make(map[string]string)   // agent_id -> direction
+	agentConf := make(map[string]float64)   // agent_id -> confidence
 
 	for _, sig := range signals {
 		// Time decay: newer signals count more
@@ -206,7 +206,7 @@ func (e *EnsembleAgent) checkConsensus(ctx context.Context, marketID string, sig
 				votes, dir, avgConf),
 			Metadata: map[string]interface{}{
 				"agreeing_agents": votes,
-				"total_agents":    len(agentVotes),
+				"total_agents":   len(agentVotes),
 				"avg_confidence":  avgConf,
 				"agent_votes":     agentVotes,
 			},
@@ -265,9 +265,9 @@ type RiskSentinel struct {
 
 	// Config
 	maxTotalExposure  float64
-	maxCategoryPct    float64 // max % of capital in one category
-	maxCorrelation    float64 // max correlation between positions
-	circuitBreakerPct float64 // trigger if loss > this % in window
+	maxCategoryPct    float64       // max % of capital in one category
+	maxCorrelation    float64       // max correlation between positions
+	circuitBreakerPct float64       // trigger if loss > this % in window
 	circuitWindow     time.Duration
 	checkInterval     time.Duration
 
@@ -288,9 +288,9 @@ type RiskConfig struct {
 func DefaultRiskConfig() RiskConfig {
 	return RiskConfig{
 		MaxTotalExposure:  50000,
-		MaxCategoryPct:    0.20, // max 20% in one category
+		MaxCategoryPct:    0.20,  // max 20% in one category
 		MaxCorrelation:    0.80,
-		CircuitBreakerPct: 0.05, // 5% loss triggers breaker
+		CircuitBreakerPct: 0.05,  // 5% loss triggers breaker
 		CircuitWindow:     30 * time.Minute,
 		CheckInterval:     10 * time.Second,
 	}

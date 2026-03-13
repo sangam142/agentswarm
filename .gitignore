@@ -1,0 +1,12 @@
+*.o
+*.a
+*.so
+.DS_Store
+.env
+.env.local
+/bin
+/dist
+/.vscode
+/.idea
+swarm
+.cache

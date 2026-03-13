@@ -6,7 +6,7 @@ import (
 	"math"
 	"time"
 
-	"agentswarm/internal/models"
+	"github.com/shrish/agentswarm/internal/models"
 )
 
 // ════════════════════════════════════════════════════════════════════════
@@ -36,7 +36,7 @@ type MomentumAgent struct {
 	maxDrawdown     float64 // pause if cumulative loss exceeds this
 
 	// State — rolling price history for each market
-	priceHistory  map[string][]float64 // market_id -> recent prices
+	priceHistory map[string][]float64 // market_id -> recent prices
 	volumeHistory map[string][]float64
 }
 
@@ -52,10 +52,10 @@ type MomentumConfig struct {
 
 func DefaultMomentumConfig() MomentumConfig {
 	return MomentumConfig{
-		ZScoreThreshold: 2.0, // 2 standard deviations
-		LookbackWindow:  20,  // 20 data points
+		ZScoreThreshold: 2.0,    // 2 standard deviations
+		LookbackWindow:  20,     // 20 data points
 		MaxOrderSize:    30,
-		MaxDrawdown:     200, // pause at -$200
+		MaxDrawdown:     200,    // pause at -$200
 		Categories:      []string{"crypto", "entertainment"},
 		Capital:         3000,
 		MaxExposure:     500,
@@ -247,12 +247,12 @@ type SpreadMakerAgent struct {
 	*BaseAgent
 
 	// Config
-	targetSpread float64 // how wide to quote around mid (e.g., 0.05)
-	maxInventory int     // max net contracts before stopping
-	minVolume    float64 // minimum 24h volume to consider
-	maxVolume    float64 // maximum volume (too liquid = no edge)
-	rebalancePct float64 // re-quote if mid moves more than this
-	maxOrderSize int
+	targetSpread    float64 // how wide to quote around mid (e.g., 0.05)
+	maxInventory    int     // max net contracts before stopping
+	minVolume       float64 // minimum 24h volume to consider
+	maxVolume       float64 // maximum volume (too liquid = no edge)
+	rebalancePct    float64 // re-quote if mid moves more than this
+	maxOrderSize    int
 
 	// State
 	inventory  map[string]int     // market_id -> net position (-ve = short YES)
@@ -273,11 +273,11 @@ type SpreadMakerConfig struct {
 
 func DefaultSpreadMakerConfig() SpreadMakerConfig {
 	return SpreadMakerConfig{
-		TargetSpread: 0.05, // 5 cent spread
+		TargetSpread: 0.05,     // 5 cent spread
 		MaxInventory: 100,
-		MinVolume:    1000,   // min $1K volume
-		MaxVolume:    100000, // max $100K (above this, market is too efficient)
-		RebalancePct: 0.02,   // re-quote if mid moves 2%
+		MinVolume:    1000,     // min $1K volume
+		MaxVolume:    100000,   // max $100K (above this, market is too efficient)
+		RebalancePct: 0.02,    // re-quote if mid moves 2%
 		MaxOrderSize: 20,
 		Categories:   []string{"politics", "economics"},
 		Capital:      10000,
@@ -393,10 +393,10 @@ func (s *SpreadMakerAgent) Evaluate(ctx context.Context, markets []models.Market
 			Reason: fmt.Sprintf("MM BID: %.3f on '%s' (mid=%.3f spread=%.3f inv=%d)",
 				bidPrice, mkt.Title, mid, s.targetSpread, inv),
 			Metadata: map[string]interface{}{
-				"strategy":  "market_maker",
-				"side":      "bid",
-				"mid":       mid,
-				"spread":    s.targetSpread,
+				"strategy": "market_maker",
+				"side":     "bid",
+				"mid":      mid,
+				"spread":   s.targetSpread,
 				"inventory": inv,
 				"platform":  mkt.Source,
 			},
@@ -413,10 +413,10 @@ func (s *SpreadMakerAgent) Evaluate(ctx context.Context, markets []models.Market
 			Reason: fmt.Sprintf("MM ASK: %.3f on '%s' (mid=%.3f spread=%.3f inv=%d)",
 				askPrice, mkt.Title, mid, s.targetSpread, inv),
 			Metadata: map[string]interface{}{
-				"strategy":  "market_maker",
-				"side":      "ask",
-				"mid":       mid,
-				"spread":    s.targetSpread,
+				"strategy": "market_maker",
+				"side":     "ask",
+				"mid":      mid,
+				"spread":   s.targetSpread,
 				"inventory": inv,
 				"platform":  mkt.Source,
 			},

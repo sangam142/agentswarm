@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"agentswarm/internal/models"
+	"github.com/shrish/agentswarm/internal/models"
 )
 
 // ════════════════════════════════════════════════════════════════════════

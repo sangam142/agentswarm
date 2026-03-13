@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"agentswarm/internal/models"
+	"github.com/shrish/agentswarm/internal/models"
 )
 
 // ════════════════════════════════════════════════════════════════════════
@@ -36,12 +36,12 @@ type ArbitrageAgent struct {
 	*BaseAgent
 
 	// Config
-	minSpread      float64 // minimum spread in price points to trigger (e.g., 0.04)
-	feeEstimate    float64 // estimated round-trip fee as fraction (e.g., 0.03)
-	maxOrderSize   int     // max contracts per order
-	scanCategories []string
-	scanInterval   time.Duration
-	minVolume      float64 // minimum volume to consider a market
+	minSpread       float64 // minimum spread in price points to trigger (e.g., 0.04)
+	feeEstimate     float64 // estimated round-trip fee as fraction (e.g., 0.03)
+	maxOrderSize    int     // max contracts per order
+	scanCategories  []string
+	scanInterval    time.Duration
+	minVolume       float64 // minimum volume to consider a market
 
 	// State
 	knownPairs map[string]*models.MarketPair
@@ -60,12 +60,12 @@ type ArbitrageConfig struct {
 
 func DefaultArbitrageConfig() ArbitrageConfig {
 	return ArbitrageConfig{
-		MinSpread:      0.04, // 4 cents minimum spread
-		FeeEstimate:    0.03, // ~3% round-trip fees
-		MaxOrderSize:   50,   // 50 contracts max
+		MinSpread:      0.04,      // 4 cents minimum spread
+		FeeEstimate:    0.03,      // ~3% round-trip fees
+		MaxOrderSize:   50,        // 50 contracts max
 		ScanCategories: []string{"crypto", "politics", "geopolitics"},
 		ScanInterval:   30 * time.Second,
-		MinVolume:      10000, // $10K minimum volume
+		MinVolume:      10000,     // $10K minimum volume
 		Capital:        5000,
 		MaxExposure:    1000,
 	}
@@ -283,10 +283,10 @@ func (a *ArbitrageAgent) generateArbSignals(pair models.MarketPair) ([]models.Si
 			Size:       float64(size),
 			Reason:     fmt.Sprintf("ARB: buy Kalshi YES @ %.3f, sell Poly YES @ %.3f, spread=%.3f", k.YesPrice, p.YesPrice, pair.Spread),
 			Metadata: map[string]interface{}{
-				"pair_key":   pair.EventKey,
-				"platform":   "kalshi",
-				"counter":    "polymarket",
-				"spread":     pair.Spread,
+				"pair_key":  pair.EventKey,
+				"platform":  "kalshi",
+				"counter":   "polymarket",
+				"spread":    pair.Spread,
 				"net_spread": netSpread,
 			},
 		})
@@ -316,10 +316,10 @@ func (a *ArbitrageAgent) generateArbSignals(pair models.MarketPair) ([]models.Si
 			Size:       float64(size),
 			Reason:     fmt.Sprintf("ARB: buy Poly YES @ %.3f, sell Kalshi YES @ %.3f, spread=%.3f", p.YesPrice, k.YesPrice, pair.Spread),
 			Metadata: map[string]interface{}{
-				"pair_key":   pair.EventKey,
-				"platform":   "polymarket",
-				"counter":    "kalshi",
-				"spread":     pair.Spread,
+				"pair_key":  pair.EventKey,
+				"platform":  "polymarket",
+				"counter":   "kalshi",
+				"spread":    pair.Spread,
 				"net_spread": netSpread,
 			},
 		})

@@ -53,7 +53,7 @@ Built in Go. Real-time data from [Attena API](https://attena.xyz). LLM integrati
 
 ### 2. Setup
 ```bash
-git clone https://github.com/sangam142/agentswarm.git
+git clone https://github.com/shrish/agentswarm.git
 cd agentswarm
 cp .env.example .env
 # Edit .env with your API keys (at minimum, ANTHROPIC_API_KEY)

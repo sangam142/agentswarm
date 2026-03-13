@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"agentswarm/internal/models"
-	"agentswarm/pkg/attena"
+	"github.com/shrish/agentswarm/internal/models"
+	"github.com/shrish/agentswarm/pkg/attena"
 )
 
 // ════════════════════════════════════════════════════════════════════════
@@ -38,17 +38,17 @@ type NewsReactorAgent struct {
 	*BaseAgent
 
 	// Config
-	claudeAPIKey  string
-	claudeModel   string
-	newsAPIKey    string
-	pollInterval  time.Duration
-	minConfidence float64
-	maxOrderSize  int
-	categories    []string
+	claudeAPIKey    string
+	claudeModel     string
+	newsAPIKey      string
+	pollInterval    time.Duration
+	minConfidence   float64
+	maxOrderSize    int
+	categories      []string
 
 	// State
 	assessmentCache map[string]*models.ImpactAssessment // hash(event) -> assessment
-	processedEvents map[string]bool                     // dedup
+	processedEvents map[string]bool                      // dedup
 	httpClient      *http.Client
 }
 
@@ -441,13 +441,13 @@ func (n *NewsReactorAgent) findAndSignal(ctx context.Context, event *models.News
 			Reason: fmt.Sprintf("NEWS: '%s' → %s (mag=%.2f) on '%s'",
 				event.Title, assessment.Direction, assessment.Magnitude, m.Title),
 			Metadata: map[string]interface{}{
-				"event_id":    event.ID,
+				"event_id":   event.ID,
 				"event_title": event.Title,
-				"source":      event.Source,
-				"direction":   assessment.Direction,
-				"magnitude":   assessment.Magnitude,
-				"reasoning":   assessment.Reasoning,
-				"platform":    m.Source,
+				"source":     event.Source,
+				"direction":  assessment.Direction,
+				"magnitude":  assessment.Magnitude,
+				"reasoning":  assessment.Reasoning,
+				"platform":   m.Source,
 			},
 		})
 	}

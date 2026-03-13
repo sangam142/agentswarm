@@ -11,12 +11,12 @@ import (
 	"syscall"
 	"time"
 
-	"agentswarm/internal/agent"
-	"agentswarm/internal/config"
-	"agentswarm/internal/exchange"
-	"agentswarm/internal/models"
-	"agentswarm/internal/store"
-	"agentswarm/pkg/attena"
+	"github.com/shrish/agentswarm/internal/agent"
+	"github.com/shrish/agentswarm/internal/config"
+	"github.com/shrish/agentswarm/internal/exchange"
+	"github.com/shrish/agentswarm/internal/models"
+	"github.com/shrish/agentswarm/internal/store"
+	"github.com/shrish/agentswarm/pkg/attena"
 )
 
 func main() {

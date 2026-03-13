@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"time"
 
-	"agentswarm/internal/models"
+	"github.com/shrish/agentswarm/internal/models"
 )
 
 // Client wraps the Attena Search API.
@@ -48,9 +48,9 @@ type SearchParams struct {
 }
 
 type searchResponse struct {
-	Query   string      `json:"query"`
-	Results []rawMarket `json:"results"`
-	Meta    searchMeta  `json:"meta"`
+	Query   string          `json:"query"`
+	Results []rawMarket     `json:"results"`
+	Meta    searchMeta      `json:"meta"`
 }
 
 type searchMeta struct {

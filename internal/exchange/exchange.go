@@ -6,7 +6,7 @@ import (
 	"math/rand"
 	"time"
 
-	"agentswarm/internal/models"
+	"github.com/shrish/agentswarm/internal/models"
 )
 
 // ════════════════════════════════════════════════════════════════════════
@@ -106,9 +106,9 @@ func (p *PaperExchange) GetFills() []models.Order {
 //
 // API docs: https://trading-api.readme.io/reference
 type KalshiExchange struct {
-	baseURL string
-	token   string
-	client  interface{} // *http.Client in production
+	baseURL   string
+	token     string
+	client    interface{} // *http.Client in production
 }
 
 func NewKalshiExchange(baseURL, email, password string) (*KalshiExchange, error) {

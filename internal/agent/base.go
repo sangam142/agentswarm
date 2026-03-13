@@ -6,10 +6,10 @@ import (
 	"sync"
 	"time"
 
-	"agentswarm/internal/exchange"
-	"agentswarm/internal/models"
-	"agentswarm/internal/store"
-	"agentswarm/pkg/attena"
+	"github.com/shrish/agentswarm/internal/exchange"
+	"github.com/shrish/agentswarm/internal/models"
+	"github.com/shrish/agentswarm/internal/store"
+	"github.com/shrish/agentswarm/pkg/attena"
 )
 
 // ════════════════════════════════════════════════════════════════════════
@@ -66,12 +66,12 @@ type BaseAgent struct {
 
 func NewBaseAgent(id, name, agentType string, deps *Deps, categories []string, capital, maxExposure float64) *BaseAgent {
 	return &BaseAgent{
-		id:          id,
-		name:        name,
-		agentType:   agentType,
-		deps:        deps,
-		stopCh:      make(chan struct{}),
-		categories:  categories,
+		id:   id,
+		name: name,
+		agentType: agentType,
+		deps: deps,
+		stopCh: make(chan struct{}),
+		categories: categories,
 		maxExposure: maxExposure,
 		state: &models.AgentState{
 			ID:               id,

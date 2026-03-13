@@ -48,7 +48,7 @@ fi
 # ── 4. Go Module Setup ──
 echo "[4/8] Initializing Go modules..."
 cat > go.mod << 'GOMOD'
-module agentswarm
+module github.com/shrish/agentswarm
 
 go 1.22
 
