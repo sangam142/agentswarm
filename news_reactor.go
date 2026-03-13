@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/sangam142/agentswarm/internal/models"
-	"github.com/sangam142/agentswarm/pkg/attena"
+	"agentswarm/internal/models"
+	"agentswarm/pkg/attena"
 )
 
 // ════════════════════════════════════════════════════════════════════════

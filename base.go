@@ -6,10 +6,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/sangam142/agentswarm/internal/exchange"
-	"github.com/sangam142/agentswarm/internal/models"
-	"github.com/sangam142/agentswarm/internal/store"
-	"github.com/sangam142/agentswarm/pkg/attena"
+	"agentswarm/internal/exchange"
+	"agentswarm/internal/models"
+	"agentswarm/internal/store"
+	"agentswarm/pkg/attena"
 )
 
 // ════════════════════════════════════════════════════════════════════════

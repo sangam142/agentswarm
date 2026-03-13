@@ -7,5 +7,3 @@ require (
 	github.com/redis/go-redis/v9 v9.2.1
 	github.com/nats-io/nats.go v1.31.0
 )
-
-replace github.com/sangam142/agentswarm => ./

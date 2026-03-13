@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/sangam142/agentswarm/internal/models"
+	"agentswarm/internal/models"
 )
 
 // ════════════════════════════════════════════════════════════════════════

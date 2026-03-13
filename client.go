@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/sangam142/agentswarm/internal/models"
+	"agentswarm/internal/models"
 )
 
 // Client wraps the Attena Search API.
